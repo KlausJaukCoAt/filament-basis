@@ -8,10 +8,12 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
 use Filament\Schemas\Schema;
-use Spatie\Permission\Models\Role;
+use App\Models\Role;
+use App\Models\User;
 use BackedEnum;
 use Filament\Support\Icons\Heroicon;
 use UnitEnum;
+
 
 class RoleResource extends Resource
 {
@@ -23,10 +25,12 @@ class RoleResource extends Resource
     
     protected static ?int $navigationSort = 2;
 
+
     # Permission
     public static function canAccess(): bool
     {
-        return auth()->user()->can('manage permissions');
+        $user = auth()->guard()->user();
+        return $user instanceof User && $user->can('manage permissions');
     }
 
       public static function form(Schema $schema): Schema
@@ -63,4 +67,6 @@ class RoleResource extends Resource
             'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
     }
+
+    
 }

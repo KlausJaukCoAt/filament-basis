@@ -11,6 +11,8 @@ class EditUser extends EditRecord
 {
     protected static string $resource = UserResource::class;
 
+    protected array $oldData = [];
+
     protected function getHeaderActions(): array
     {
         return [
@@ -21,10 +23,32 @@ class EditUser extends EditRecord
     {
         return $this->getResource()::getUrl('index');
     }
-    protected function afterCreate(): void
+    # Notificaton after edit a user
+    protected function getSavedNotification(): ?Notification
     {
+        return null;
+    }
+
+    protected function beforeSave(): void
+    {
+        // Alte Permissions sichern, bevor sie überschrieben werden
+        $this->oldData = $this->record->toArray();
+    }
+    protected function afterSave(): void
+    {
+
+        // Logging
+        activity()
+            ->performedOn($this->record)
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'old' => $this->oldData,
+                'new' => $this->record->toArray(),
+            ])
+            ->log("User '{$this->record->name}' wurde geändert");
+
         Notification::make()
-            ->title('User created: ' . $this->record->name)
+            ->title('User ID: ' . $this->record->id .' modified')
             ->success()
             ->send();
     }

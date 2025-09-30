@@ -1,0 +1,55 @@
+# Laravel & Filament
+/vendor/
+/node_modules/
+/public/hot
+/public/storage
+/storage/*.key
+.env
+.env.backup
+.phpunit.result.cache
+bootstrap/cache/
+storage/logs/
+storage/framework/
+
+# Filament (optional caches)
+filament/cache/
+
+# Laravel Telescope (optional)
+telescope/requests/*.json
+
+# Laravel Horizon (optional)
+horizon/*.json
+
+# Laravel Livewire (optional)
+livewire-tmp/
+
+# Composer & npm
+composer.lock
+package-lock.json
+yarn.lock
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+*.swp
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# IDEs & Editors
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Logs & Debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
