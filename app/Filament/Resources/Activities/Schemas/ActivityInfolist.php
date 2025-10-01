@@ -45,6 +45,12 @@ class ActivityInfolist
             ])->columns(2),
 
             Group::make([
+            KeyValueEntry::make('properties.attributes')
+                ->label('Attributes')
+                ->hidden(fn($record) => empty($record->properties['attributes'] ?? []))
+                ->state(fn($record) => collect($record->properties['attributes'] ?? [])
+                ->forget(['password', 'remember_token'])
+                ->toArray()),
             KeyValueEntry::make('properties.old')
                 ->label('Old Value')
                 ->hidden(fn($record) => empty($record->properties['old'] ?? []))
@@ -57,7 +63,7 @@ class ActivityInfolist
                 ->state(fn($record) => collect($record->properties['new'] ?? [])
                 ->forget(['password', 'remember_token'])
                 ->toArray())
-            ])->columns(1)->columnSpanFull(),
+            ])->columns(2)->columnSpanFull(),
             ]);
     }
 }

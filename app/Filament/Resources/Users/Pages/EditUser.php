@@ -6,6 +6,7 @@ use App\Filament\Resources\Users\UserResource;
 use Filament\Actions\DeleteAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use Illuminate\Support\Facades\Auth;
 
 class EditUser extends EditRecord
 {
@@ -40,7 +41,7 @@ class EditUser extends EditRecord
         // Logging
         activity()
             ->performedOn($this->record)
-            ->causedBy(auth()->user())
+            ->causedBy(Auth::user())
             ->withProperties([
                 'old' => $this->oldData,
                 'new' => $this->record->toArray(),

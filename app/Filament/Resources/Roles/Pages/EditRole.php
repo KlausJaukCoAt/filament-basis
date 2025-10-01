@@ -8,7 +8,7 @@ use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-
+use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
 
 
@@ -40,18 +40,15 @@ class EditRole extends EditRecord
 
         // Logging
         activity()
-            ->performedOn($this->record)            
-            ->causedBy(auth()->user())                        
+            ->performedOn($this->record)
+            ->useLog('role')
+            ->event('updated')
+            ->causedBy(Auth::user())
             ->withProperties([
                 'old' => $this->oldPermissions,
                 'new' => $newPermissions->pluck('name')->toArray(),
             ])
-            ->log("Permissions für Rolle '{$this->record->name}' wurden geändert");
-
-        Notification::make()
-            ->title('Rolle aktualisiert')
-            ->success()
-            ->send();
+            ->log("Role modified");  
     }
 
 

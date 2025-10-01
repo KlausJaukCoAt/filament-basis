@@ -2,19 +2,19 @@
 
 namespace App\Models;
 
-use Spatie\Permission\Models\Role as SpatieRole;
+use Spatie\Permission\Models\Permission as SpatiePermission;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
-class Role extends SpatieRole
+class Permission extends SpatiePermission
 {
     use LogsActivity;
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-            ->useLogName('role')
-            ->logOnly(['name']) // logge nur relevante Felder
+            ->useLogName('permission')
+            ->logOnly(['name']) // oder andere relevante Felder
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }
