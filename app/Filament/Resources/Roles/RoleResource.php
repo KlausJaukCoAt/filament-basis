@@ -11,6 +11,7 @@ use Filament\Schemas\Schema;
 use App\Models\Role;
 use App\Models\User;
 use BackedEnum;
+use Filament\Forms\Components\Repeater;
 use Filament\Support\Icons\Heroicon;
 use UnitEnum;
 
@@ -42,12 +43,12 @@ class RoleResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->unique(ignoreRecord: true),
-
                 Select::make('permissions')
                     ->multiple()
                     ->relationship('permissions', 'name')
                     ->preload()
                     ->label('Berechtigungen'),
+
             ]);
         }
 
@@ -70,6 +71,5 @@ class RoleResource extends Resource
             'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
     }
-
     
 }

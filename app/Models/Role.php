@@ -14,7 +14,7 @@ class Role extends SpatieRole
     {
         return LogOptions::defaults()
             ->useLogName('role')
-            ->logOnly(['name']) // logge nur relevante Felder
+            ->logOnly(['name', 'guard_name']) // logge nur relevante Felder
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }

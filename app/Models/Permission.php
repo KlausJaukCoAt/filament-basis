@@ -14,7 +14,7 @@ class Permission extends SpatiePermission
     {
         return LogOptions::defaults()
             ->useLogName('permission')
-            ->logOnly(['name']) // oder andere relevante Felder
+            ->logOnly(['name', 'guard_name']) // oder andere relevante Felder
             ->logOnlyDirty()
             ->dontSubmitEmptyLogs();
     }

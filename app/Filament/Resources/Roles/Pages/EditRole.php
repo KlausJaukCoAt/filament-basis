@@ -8,7 +8,6 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\Action as FormAction;
-use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Models\Permission;
@@ -31,7 +30,7 @@ class EditRole extends EditRecord
 
     protected function beforeSave(): void
     {
-        // Alte Permissions sichern, bevor sie überschrieben werden
+        // Für Logging - Alte Permissions sichern, bevor sie überschrieben werden
         $this->oldPermissions = $this->record->permissions->pluck('name')->toArray();
     }
     protected function afterSave(): void
@@ -85,10 +84,11 @@ class EditRole extends EditRecord
     {
         return [
         FormAction::make('save')
-                ->label('save changes')
+                ->label('save')
                 ->color('primary')
                 ->icon('heroicon-o-x-circle')
                 ->action(function () {
+                    $this->save(); // Eintrag speichern
                     $this->unlockRecord($this->record);
                     return redirect()->route('filament.admin.resources.roles.index');
                 }),
@@ -102,6 +102,7 @@ class EditRole extends EditRecord
                 }),
         ];
     }
+
 
 
 }
