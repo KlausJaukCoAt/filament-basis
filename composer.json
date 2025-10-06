@@ -36,13 +36,15 @@
         }
     },
     "scripts": {
-          "post-install-cmd": [
-            "mkdir -p bootstrap/cache storage/framework/views storage/framework/cache storage/logs",
-            "chmod -R 775 bootstrap/cache storage",
-            "@php artisan storage:link",
-            "cp .env.example .env",
-            "@php artisan key:generate"
-    ],
+            "post-install-cmd": [
+                "mkdir -p bootstrap/cache storage/framework/views storage/framework/cache storage/logs",
+                "chmod -R 775 bootstrap/cache storage"
+            ],
+          "post-create-project-cmd": [
+                "cp .env.example .env",
+                "@php artisan key:generate",
+                "@php artisan storage:link"
+      ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
