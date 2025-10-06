@@ -1,0 +1,21 @@
+<?php
+
+use Modules\{{module}}\Models\{{model}};
+use function Pest\Laravel\getJson;
+
+beforeEach(function () {
+    {{model}}::factory()->create([
+        'name' => 'Max Mustermann',
+        'email' => 'max@example.com',
+    ]);
+});
+
+it('liefert {{model}}-Daten via API', function () {
+    $response = getJson('/api/{{module}}');
+
+    $response->assertOk()
+             ->assertJsonFragment([
+                 'name' => 'Max Mustermann',
+                 'email' => 'max@example.com',
+             ]);
+});

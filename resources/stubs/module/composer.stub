@@ -1,0 +1,16 @@
+{
+    "name": "your-org/{{module}}-module",
+    "type": "library",
+    "autoload": {
+        "psr-4": {
+            "{{namespace}}": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "{{namespace}}Providers\\{{module}}ServiceProvider"
+            ]
+        }
+    }
+}

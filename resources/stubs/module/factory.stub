@@ -1,0 +1,19 @@
+<?php
+
+namespace Modules\{{module}}\Database\Factories;
+
+use Modules\{{module}}\Models\{{model}};
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class {{model}}Factory extends Factory
+{
+    protected $model = {{model}}::class;
+
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'email' => $this->faker->safeEmail(),
+        ];
+    }
+}
