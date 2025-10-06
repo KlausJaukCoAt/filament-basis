@@ -40,11 +40,6 @@
                 "mkdir -p bootstrap/cache storage/framework/views storage/framework/cache storage/logs",
                 "chmod -R 775 bootstrap/cache storage"
             ],
-          "post-create-project-cmd": [
-                "cp .env.example .env",
-                "@php artisan key:generate",
-                "@php artisan storage:link"
-      ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
@@ -57,6 +52,7 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
+            "cp .env.example .env",
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
