@@ -37,9 +37,9 @@
     },
     "scripts": {
           "post-install-cmd": [
-            "@php artisan storage:link",
             "mkdir -p bootstrap/cache storage/framework/views storage/framework/cache storage/logs",
-            "chmod -R 775 bootstrap/cache storage"
+            "chmod -R 775 bootstrap/cache storage",
+            "@php artisan storage:link"
     ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
